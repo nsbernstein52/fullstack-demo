@@ -1,4 +1,7 @@
 -- bug_tracking_schema.sql
+-- Initialize: $> psql -U dbuser -d dbname -a -f filename.sql
+-- Run db$> psql -U postgres
+-- Enter: password
 
 DROP DATABASE IF EXISTS bugtracking;
 
@@ -14,7 +17,7 @@ CREATE TABLE users (
 CREATE TABLE threat_levels (
   id SERIAL PRIMARY KEY,
   threat_level TEXT
-)
+);
 
 CREATE TABLE bugs (
   id SERIAL PRIMARY KEY,
