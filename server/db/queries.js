@@ -1,10 +1,12 @@
+// queries.js
 // create db
+
 const { Pool } = require('pg');
 
 const pool = new Pool ({
-  database: 'bugTracking',
+  database: 'bugtracking',
   user: 'postgres',
-  password: 'P2020'
+  password: 'Psa2020s'
 })
 
 // INSERT INTO table_name (column_names ...) VALUES ('val1', val2', ...) 
@@ -20,14 +22,14 @@ const addBug = (bugs) => {
     .then(() => true);
 };
 
-// DELETE FROM table_name WHERE condition; ???
+// DELETE FROM table_name WHERE condition;
 const deleteBug = (id) => {
   let value = [id]
   return pool.query('DELETE FROM bugs WHERE id = $1', value)
       .then(() => true)
 };
 
-// SELCT * FROM table_name
+// SELECT * FROM table_name
 const getAllBugs = () => {
   return pool.query('SELECT * FROM bugs')
     .then(res => {
@@ -36,18 +38,13 @@ const getAllBugs = () => {
     })
 };
 
-// SELCT * FROM table_name WHERE value = column
+// SELECT * FROM table_name WHERE value = column
 const getBug = (id) => {
   let values = [id]
   return pool.query(`SELECT * FROM bugs WHERE $1 = id`, values)
     .then(res => res.rows)
 };
 
-req.body.description, 
-req.body.reported_by,
-req.body.created_date,
-req.body.assigned_to,
-req.body.bugs.threat_level
 
 // UPDATE table SET column = <newVal> WHERE condition; ???
 const updateBug = (messages) => {
@@ -57,7 +54,7 @@ const updateBug = (messages) => {
 };
 
 module.exports = {
-  pool,
+  // pool,
   addBug,
   deleteBug,
   getAllBugs,
