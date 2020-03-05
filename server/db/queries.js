@@ -31,8 +31,18 @@ const addBug = (bugs) => {
   ]
   // return pool.query('INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level)  VALUES ($1, (SELECT id FROM users WHERE user_name = $2), $3, (SELECT id FROM users WHERE user_name = $4), $5)', values)
   return pool.query('INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level)  VALUES ($1, $2, $3, $4, $5)', values)
-    .then(() => true)
-    .catch(err => console.log(err));
+    // .then(() => true)
+    // .catch(err => console.log(err));
+    .then(result => {
+      console.log("q: aB: r.r[0]", result.rows[0]);
+      return result.rows;
+    })
+    // .end() express, not pg!
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+    // .end() express, not pg!
+  })
 };
 
 // DELETE FROM table_name WHERE condition;
@@ -40,7 +50,15 @@ const deleteBug = (id) => {
   console.log("q: dB: i:", id);
   let values = [id]
   return pool.query('DELETE FROM bugs WHERE id = $1', values)
-      .then(() => true)
+    // .then(() => true)
+    .then(result => {
+      console.log("q: dB: r", result);
+      return result.rows;
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+  })  
 };
 
 // SELECT * FROM table_name WHERE value = column
@@ -56,17 +74,15 @@ const getAllBugs = () => {
   console.log("q: gAB: ");
   return pool.query('SELECT * FROM bugs') 
     .then(result => {
-      // console.log("q: gAB: r.r", result.rows[1]);
+      console.log("q: gAB: r.r", result.rows[1]);
       return result.rows;
     })
     // .end() express, not pg!
-    // console.log(result);
     .catch(err => {
       console.error(err);
       res.status(400)
     // .end() express, not pg!
   })
-
 };
 
 // SELECT * FROM table_name WHERE value = column
@@ -74,7 +90,15 @@ const getBug = (id) => {
   console.log("q: gB: i:", id);
   let values = [id]
   return pool.query(`SELECT * FROM bugs WHERE $1 = id`, values)
-    .then(res => res.rows)
+    // .then(res => res.rows)
+    .then(result => {
+      console.log("q: gB: COMPLETED SUCCESSFULLY");
+      return result.rows;
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+  })
 };
 
 // UPDATE table SET column = <newVal> WHERE condition; ???
@@ -82,7 +106,15 @@ const updateBugThreatLevel = (id, threat_level) => {
   console.log('q: uPBTL: i, t_l: ', id, threat_level)
   let values = [id, threat_level ]
   return pool.query('UPDATE bugs SET threat_level = $2 WHERE id = $1', values)
-      .then(() => true)
+    // .then(() => true)
+    .then(result => {
+      console.log("q: uBTL: COMPLETED SUCCESSFULLY");
+      return result.rows;
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+    })
 };
 
 console.log('At end of queries functions');
