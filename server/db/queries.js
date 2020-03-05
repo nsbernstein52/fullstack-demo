@@ -28,7 +28,8 @@ const addBug = (bugs) => {
     bugs.assigned_to,
     bugs.threat_level
   ]
-  return pool.query('INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level)  VALUES ($1, (SELECT id FROM users WHERE user_name = $2), $3, (SELECT id FROM users WHERE user_name = $4), $5)', values)
+  // return pool.query('INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level)  VALUES ($1, (SELECT id FROM users WHERE user_name = $2), $3, (SELECT id FROM users WHERE user_name = $4), $5)', values)
+  return pool.query('INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level)  VALUES ($1, $2, $3, $4, $5)', values)
     .then(() => true)
     .catch(err => console.log(err));
 };
