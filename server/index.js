@@ -30,15 +30,15 @@ app.post('/bugtracker', (req, res) => {
   // pool.addBug(req.body) // for use with client, eg, object
   // pool.addBug(req.params) // for use for route
   pool.addBug(req.query) // for use porbably only with postman (query) params
-    .then(results => res.send(results))
-    // .then(result => {
-    //     console.log(result);
-    //     res.sendStatus(201)
-    //   })
-    //   .catch(error=>{
-    //     console.log(error);
-    //     res.status(400).end()
-    //   })
+    // .then(results => res.send(results))
+    .then(result => {
+        console.log(result);
+        res.sendStatus(201)
+      })
+    .catch(error => {
+      console.log(error);
+      res.status(400).end()
+      })
 });
 
 // deleteBug  WORKING!
@@ -109,12 +109,12 @@ app.get('/bugtracker/:id', (req, res) => {
     //   })
 });
 
-    // updateBugThreatLevel WIP
-app.put('/bugtracker/bugs/:threat_level', (req, res) => {
-  // console.log("i: id, threat_level: ", req.params.id, req.body.threat_level)
-  console.log("i: uBTL: p: r.p.i: ", req.params.id)
-  console.log("i: uBTL: p: t.b.t_l: ", req.body.threat_level)
-  pool.updateBugThreatLevel(req.params.id, req.body.threat_level)
+    // updateBugThreatLevel WORKING!
+    // postman /bugtracker/bugs/None?id=12
+    app.put('/bugtracker/bugs/:threat_level', (req, res) => {
+  console.log("i: uBTL: p: r.p.t_l: ", req.params.threat_level);
+  console.log("i: uBTL: p: r.q: ", req.query);
+  pool.updateBugThreatLevel(req.query.id, req.params.threat_level)
     .then(results => res.send(results))
     // .then(results => {
     //     res.send(results);
