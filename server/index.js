@@ -32,50 +32,55 @@ app.post('/bugtracker', (req, res) => {
   pool.addBug(req.query) // for use porbably only with postman (query) params
     // .then(results => res.send(results))
     .then(result => {
-        console.log(result);
-        res.sendStatus(201)
-      })
-    .catch(error => {
-      console.log(error);
-      res.status(400).end()
-      })
+      console.log("i: aB: COMPLETED SUCCESSFULLY ");
+      // res.sendStatus(201) // code
+      res.send(result.rows) // code + data
+      .end()
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+      .end()
+    })
 });
 
 // deleteBug  WORKING!
 app.delete('/bugtracker/:id', (req, res) => {
   console.log("i: dB: d: r.p.i: ", req.params.id);
   return pool.deleteBug(req.params.id)
-  .then(results => res.send(results))
-  // .then(() => res.sendStatus(201))
-  //     .catch(error=>{
-  //       console.log(error);
-  //       res.status(400).end()
-  //     })
+    // .then(results => res.send(results))
+    .then(result => {
+    console.log("i: dB: result: ", result);
+    res.send(result.rows) // code + data
+    .end()
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(400)
+    .end()
+  })
 });
 
-// filterBugsByThreatLevel WORKING!
+  // filterBugsByThreatLevel WORKING!
+  // postman example: localhost:3000/bugtracker/bugs/Critical
 app.get('/bugtracker/bugs/:threat_level', (req, res) => {
-// app.get('/bugtracker/', (req, res) => {
-  // console.log("i: fBBTL: g: t_l", threat_level);
-  // console.log("i: fBBTL: g: r.p.i", req.params.id);
-  // console.log("i: fBBTL: g: r.b.t_l", req.body.threat_level);
+  // console.log("i: fBBTL: g: t_l", threat_level); // undefined
+  // console.log("i: fBBTL: g: r.p.i", req.params.id); // undefined
+  // console.log("i: fBBTL: g: r.b.t_l", req.body.threat_level); // undefined
   console.log("i: fBBTL: g: r.p.i", req.params.threat_level);
-  // pool.filterBugsByThreatLevel(req.params.id, req.body.threat_level)
-  // pool.filterBugsByThreatLevel(req.body.threat_level)
   pool.filterBugsByThreatLevel(req.params.threat_level)
-    .then(results => res.send(results))
-    // then( (result) => ({
-    //     console.log(result);
-    //     res.sendStatus(201)
-    //     // console.log(result.rows);
-    //     // res.send(result.rows).end()
-    //   }))
-    //   catch(error=>{
-    //     console.log(error);
-    //     res.status(400).end()
-    //   })
+    // .then(results => res.send(results))
+    .then(result => {
+      console.log("i: fBBTL: result: ", result);
+      res.send(result.rows) // code + data
+      .end()
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+      .end()
+    })
 });
-
 
 // getAllBugs WORKING!
 app.get('/bugtracker', (req, res) => {
@@ -87,7 +92,6 @@ app.get('/bugtracker', (req, res) => {
       res.sendStatus(201) // code
       res.send(result.rows) // code + data
       .end()
-        // console.log(result);
     })
     .catch(err => {
       console.error(err);
@@ -102,29 +106,34 @@ app.get('/bugtracker/:id', (req, res) => {
   pool.getBug(req.params.id)
     // .then(results => res.send(results))
     .then(result => {
-      console.log(result);
-      res.sendStatus(201)
+      console.log("i: gB: result: ", result);
+      res.send(result.rows) // code + data
+      .end()
     })
-    .catch(error=>{
-      console.log(error);
-      res.status(400).end()
-      })
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+      .end()
+    })
 });
 
     // updateBugThreatLevel WORKING!
-    // postman /bugtracker/bugs/None?id=12
-    app.put('/bugtracker/bugs/:threat_level', (req, res) => {
+    // postman example /bugtracker/bugs/None?id=12
+app.put('/bugtracker/bugs/:threat_level', (req, res) => {
   console.log("i: uBTL: p: r.p.t_l: ", req.params.threat_level);
   console.log("i: uBTL: p: r.q: ", req.query);
   pool.updateBugThreatLevel(req.query.id, req.params.threat_level)
-    .then(results => res.send(results))
-    // .then(results => {
-    //     res.send(results);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //     res.status(400).end()
-    //   })
+    // .then(results => res.send(results))
+    .then(result => {
+      console.log("i: uBTL: result: ", result);
+      res.send(result.rows) // code + data
+      .end()
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+      .end()
+    })
 });
 
 app.listen(3000, () => {console.log('End of index.js. Server is running port 3000')}); 
