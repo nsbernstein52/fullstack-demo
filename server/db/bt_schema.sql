@@ -3,11 +3,11 @@
 -- Run db$> psql -U postgres
 -- Enter: password
 
-DROP DATABASE IF EXISTS bugtracking;
+DROP DATABASE IF EXISTS bugtracker;
 
-CREATE DATABASE bugtracking;
+CREATE DATABASE bugtracker;
 
-\c bugtracking;
+\c bugtracker;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -41,7 +41,10 @@ INSERT INTO threat_levels (threat_level) VALUES ('Important');
 INSERT INTO threat_levels (threat_level) VALUES ('Low-Priority');
 INSERT INTO threat_levels (threat_level) VALUES ('None');
 
--- test bug report
+-- test bug reports
 INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level) 
-  VALUES ('Test bug report',
+  VALUES ('Test bug report 1',
     '1', '01/01/2020', '5', 'Critical');
+INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level) 
+  VALUES ('Test bug report 2',
+    '2', '01/02/2020', '4', 'Important');
