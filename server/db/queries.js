@@ -29,7 +29,6 @@ const addBug = (bugs) => {
     bugs.assigned_to,
     bugs.threat_level
   ]
-  // return pool.query('INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level)  VALUES ($1, (SELECT id FROM users WHERE user_name = $2), $3, (SELECT id FROM users WHERE user_name = $4), $5)', values)
   return pool.query('INSERT INTO bugs (bug_description, reported_by, created_date, assigned_to, threat_level)  VALUES ($1, $2, $3, $4, $5)', values)
     // .then(() => true)
     // .catch(err => console.log(err));
@@ -66,7 +65,15 @@ const filterBugsByThreatLevel = (threat_level) => {
   console.log("q: fBBTL: t_l:", threat_level);
   let values = [threat_level]
   return pool.query(`SELECT * FROM bugs WHERE $1 = threat_level`, values)
-    .then(res => res.rows)
+    // .then(res => res.rows)
+    .then(result => {
+      console.log("q: fBBTL: r.r", result.rows[0]);
+      return result.rows;
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+  })
 };
 
 // SELECT * FROM table_name
