@@ -21,6 +21,7 @@ console.log('Connected to DB. At beginning of queries functions');
 
 // INSERT INTO table_name (column_names ...) VALUES ('val1', val2', ...) 
 const addBug = (bugs) => {
+  console.log("q: aB: bugs:", bugs);
   let values = [
     bugs.description, 
     bugs.reported_by,
@@ -36,7 +37,7 @@ const addBug = (bugs) => {
 
 // DELETE FROM table_name WHERE condition;
 const deleteBug = (id) => {
-  // console.log("entering dB:", id);
+  console.log("q: dB: i:", id);
   let values = [id]
   return pool.query('DELETE FROM bugs WHERE id = $1', values)
       .then(() => true)
@@ -44,6 +45,7 @@ const deleteBug = (id) => {
 
 // SELECT * FROM table_name WHERE value = column
 const filterBugsByThreatLevel = (threat_level) => {
+  console.log("q: fBBTL: t_l:", threat_level);
   let values = [threat_level]
   return pool.query(`SELECT * FROM bugs WHERE $1 = threat_level`, values)
     .then(res => res.rows)
@@ -51,7 +53,7 @@ const filterBugsByThreatLevel = (threat_level) => {
 
 // SELECT * FROM table_name
 const getAllBugs = () => {
-  console.log('Entering gAB')
+  console.log("q: gAB: ");
   return pool.query('SELECT * FROM bugs') 
     .then(res => {
       console.log(res.rows);
@@ -61,14 +63,16 @@ const getAllBugs = () => {
 
 // SELECT * FROM table_name WHERE value = column
 const getBug = (id) => {
+  console.log("q: gB: i:", id);
   let values = [id]
   return pool.query(`SELECT * FROM bugs WHERE $1 = id`, values)
     .then(res => res.rows)
 };
 
 // UPDATE table SET column = <newVal> WHERE condition; ???
-const updateBugThreatLevel = (bugs) => {
-  let values = [req.params.id, req.body.threat_level ]
+const updateBugThreatLevel = (id, threat_level) => {
+  console.log('q: uPBTL: i, t_l: ', id, threat_level)
+  let values = [id, threat_level ]
   return pool.query('UPDATE bugs SET threat_level = $2 WHERE id = $1', values)
       .then(() => true)
 };

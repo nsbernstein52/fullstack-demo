@@ -24,6 +24,7 @@ console.log('Beginning of index.js')
 
 // addBug
 app.post('/bugtracker', (req, res) => {
+  console.log("i: aB: p: r.b: ", req.body);
   return pool.addBug(req.body)
     .then(results => res.send(results))
     // .then(result => {
@@ -38,6 +39,7 @@ app.post('/bugtracker', (req, res) => {
 
 // deleteBug
 app.delete('/bugtracker/:id', (req, res) => {
+  console.log("i: dB: d: r.p.i: ", req.params.id);
   return pool.deleteBug(req.params.id)
   .then(results => res.send(results))
   // .then(() => res.sendStatus(201))
@@ -49,7 +51,10 @@ app.delete('/bugtracker/:id', (req, res) => {
 
 // filterBugsByThreatLevel
 app.get('/bugtracker/:threat_level', (req, res) => {
-  pool.filterBugsByThreatLevel(req.params.id, req.body.threat_level)
+  console.log("i: fBBTL: g: r.p.i", req.params.id);
+  console.log("i: fBBTL: g: r.b.t_l", req.body.threat_level);
+  // pool.filterBugsByThreatLevel(req.params.id, req.body.threat_level)
+  pool.filterBugsByThreatLevel(req.body.threat_level)
     .then(results => res.send(results))
     // then( (result) => ({
     //     console.log(result);
@@ -66,6 +71,7 @@ app.get('/bugtracker/:threat_level', (req, res) => {
 
 // getAllBugs
 app.get('/bugtracker', (req, res) => {
+  console.log("i: gAB: g()");
   pool.getAllBugs()
     .then(results => res.send(results))
     // then( (result) => ({
@@ -82,6 +88,7 @@ app.get('/bugtracker', (req, res) => {
 
 // getBug
 app.get('/bugtracker/:id', (req, res) => {
+  console.log("i: gB: g: r.p.i", req.params.id);
   pool.getBug(req.params.id)
     .then(results => res.send(results))
     // .then(result => {
@@ -94,23 +101,26 @@ app.get('/bugtracker/:id', (req, res) => {
     //   })
 });
 
-// getBug
-app.get('/bugtracker/:threat_level', (req, res) => {
-  pool.getBug(req.params.id)
-    .then(results => res.send(results))
-    // .then(result => {
-    //   console.log(result);
-    //   res.sendStatus(201)
-    // })
-    // .catch(error=>{
-    //   console.log(error);
-    //   res.status(400).end()
-    //   })
-  });
+// getBugBTL
+// app.get('/bugtracker/:threat_level', (req, res) => {
+//   console.log("i: gBBTL: r.p.i: ", req.params.id)
+//   pool.getBug(req.params.id)
+//     .then(results => res.send(results))
+//     // .then(result => {
+//     //   console.log(result);
+//     //   res.sendStatus(201)
+//     // })
+//     // .catch(error=>{
+//     //   console.log(error);
+//     //   res.status(400).end()
+//     //   })
+//   });
 
     // updateBugThreatLevel
-app.get('/bugtracker/:threat_level', (req, res) => {
-  // console.log(req.params, req.body)
+app.put('/bugtracker/:threat_level', (req, res) => {
+  // console.log("i: id, threat_level: ", req.params.id, req.body.threat_level)
+  console.log("i: uBTL: p: r.p.i: ", req.params.id)
+  console.log("i: uBTL: p: t.b.t_l: ", req.body.threat_level)
   pool.updateBugThreatLevel(req.params.id, req.body.threat_level)
     .then(results => res.send(results))
     // .then(results => {
