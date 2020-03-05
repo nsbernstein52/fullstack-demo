@@ -3,10 +3,10 @@
 // functions
 //   addBug tbd
 //   deleteBug tbd
+//   filterBugsThreatLevel tbd
 //   getAllBugs tbd
 //   getBug tbd
 //   updateBugThreatLevel tbd
-//   filterBugsThreatLevel tbd
 
 
 const { Pool } = require('pg');
@@ -67,7 +67,7 @@ const filterBugsByThreatLevel = (threat_level) => {
 };
 
 // UPDATE table SET column = <newVal> WHERE condition; ???
-const updateBugByThreatLevel = (bugs) => {
+const updateBugThreatLevel = (bugs) => {
   let values = [req.params.id, req.body.threat_level ]
   return pool.query('UPDATE bugs SET threat_level = $2 WHERE id = $1', values)
       .then(() => true)
@@ -82,5 +82,5 @@ module.exports = {
   filterBugsByThreatLevel,
   getAllBugs,
   getBug,
-  updateBugByThreatLevel
+  updateBugThreatLevel
 }

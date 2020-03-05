@@ -3,9 +3,10 @@
 // functions:
 //   addBug WIP
 //   deleteBug tbd
+//   filterBugsByThreat tbd
 //   getAllBugs WIP
 //   getBug WIP
-//   filterBugsByThreat tbd
+//   updateBugThreatLevel WIP
 
 const express = require('express');
 const app = express();
@@ -107,10 +108,10 @@ app.get('/bugtracker/:threat_level', (req, res) => {
     //   })
   });
 
-    // updateBugByThreatLevel
+    // updateBugThreatLevel
 app.get('/bugtracker/:threat_level', (req, res) => {
   // console.log(req.params, req.body)
-  pool.updateBugByThreatLevel(req.params.id, req.body.threat_level)
+  pool.updateBugThreatLevel(req.params.id, req.body.threat_level)
     .then(results => res.send(results))
     // .then(results => {
     //     res.send(results);
