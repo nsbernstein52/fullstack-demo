@@ -60,14 +60,14 @@ const getBug = (id) => {
 };
 
 // SELECT * FROM table_name WHERE value = column
-const filterBugsThreatLevel = (threat_level) => {
-  let values = [bugs.threat_level]
+const filterBugsByThreatLevel = (threat_level) => {
+  let values = [threat_level]
   return pool.query(`SELECT * FROM bugs WHERE $1 = threat_level`, values)
     .then(res => res.rows)
 };
 
 // UPDATE table SET column = <newVal> WHERE condition; ???
-const updateBugThreatLevel = (bugs) => {
+const updateBugByThreatLevel = (bugs) => {
   let values = [req.params.id, req.body.threat_level ]
   return pool.query('UPDATE bugs SET threat_level = $2 WHERE id = $1', values)
       .then(() => true)
@@ -79,8 +79,8 @@ module.exports = {
   // pool,
   addBug,
   deleteBug,
-  filterBugsThreatLevel,
+  filterBugsByThreatLevel,
   getAllBugs,
   getBug,
-  updateBugThreatLevel
+  updateBugByThreatLevel
 }
