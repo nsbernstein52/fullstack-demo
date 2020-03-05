@@ -33,8 +33,8 @@ const addBug = (bugs) => {
     // .then(() => true)
     // .catch(err => console.log(err));
     .then(result => {
-      console.log("q: aB: r.r[0]", result.rows[0]);
-      return result.rows;
+      console.log("q: aB: COMPLETED SUCCESSFULLY");
+      return result;
     })
     // .end() express, not pg!
     .catch(err => {
@@ -52,7 +52,7 @@ const deleteBug = (id) => {
     // .then(() => true)
     .then(result => {
       console.log("q: dB: COMPLETED SUCCESSFULLY");
-      return result.rows;
+      return result;
     })
     .catch(err => {
       console.error(err);
@@ -100,7 +100,7 @@ const getBug = (id) => {
     // .then(res => res.rows)
     .then(result => {
       console.log("q: gB: COMPLETED SUCCESSFULLY");
-      return result.rows;
+      return result.rows[0];
     })
     .catch(err => {
       console.error(err);
@@ -116,7 +116,7 @@ const updateBugThreatLevel = (id, threat_level) => {
     // .then(() => true)
     .then(result => {
       console.log("q: uBTL: COMPLETED SUCCESSFULLY");
-      return result.rows;
+      return result;
     })
     .catch(err => {
       console.error(err);

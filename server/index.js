@@ -34,7 +34,7 @@ app.post('/bugtracker', (req, res) => {
     .then(result => {
       console.log("i: aB: COMPLETED SUCCESSFULLY ");
       // res.sendStatus(201) // code
-      res.send(result.rows) // code + data
+      res.send(result.rows[0]) // code + data
       .end()
     })
     .catch(err => {
@@ -51,8 +51,8 @@ app.delete('/bugtracker/:id', (req, res) => {
   pool.deleteBug(req.params.id)
     // .then(results => res.send(results))
     .then(result => {
-    console.log("i: dB: result: ", result);
-    res.send(result.rows) // code + data
+    console.log("i: dB: result: COMPLETED SUCCESSFULLY");
+    res.send(result.rows[0]) // code + data
     .end()
   })
   .catch(err => {
@@ -72,7 +72,7 @@ app.get('/bugtracker/bugs/:threat_level', (req, res) => {
   pool.filterBugsByThreatLevel(req.params.threat_level)
     // .then(results => res.send(results))
     .then(result => {
-      console.log("i: fBBTL: result: ", result);
+      console.log("i: fBBTL: result: ", result.rows);
       res.send(result.rows) // code + data
       .end()
     })
@@ -108,7 +108,7 @@ app.get('/bugtracker/:id', (req, res) => {
     // .then(results => res.send(results))
     .then(result => {
       console.log("i: gB: result: ", result);
-      res.send(result.rows) // code + data
+      res.send(result) // code + data
       .end()
     })
     .catch(err => {
@@ -127,7 +127,7 @@ app.put('/bugtracker/bugs/:threat_level', (req, res) => {
     // .then(results => res.send(results))
     .then(result => {
       console.log("i: uBTL: result: ", result);
-      res.send(result.rows) // code + data
+      res.send(result) // code + data
       .end()
     })
     .catch(err => {
