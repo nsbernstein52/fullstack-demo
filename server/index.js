@@ -17,47 +17,55 @@ const pool = require('./db/queries');
 
 const port = 3000;
 
+console.log('Beginning of index.js')
+
+
+
 // addBug
-app.post('/api/bugtracker', (req, res) => {
-  pool.addBug(req.body)
-      .then(result => {
-        console.log(result);
-        res.sendStatus(201)
-      })
-      .catch(error=>{
-        console.log(error);
-        res.status(400).end()
-      })
+app.post('/bugtracker', (req, res) => {
+  return pool.addBug(req.body)
+    .then(results => res.send(results))
+    // .then(result => {
+    //     console.log(result);
+    //     res.sendStatus(201)
+    //   })
+    //   .catch(error=>{
+    //     console.log(error);
+    //     res.status(400).end()
+    //   })
 });
 
 // getAllBugs
-app.get('/api/bugtracker', (req, res) => {
+app.get('/bugtracker', (req, res) => {
   pool.getAllBugs()
-      .then(result => {
-        console.log(result);
-        res.sendStatus(201)
-      })
-      .catch(error=>{
-        console.log(error);
-        res.status(400).end()
-      })
+    .then(results => res.send(results))
+    // then( (result) => ({
+    //     console.log(result);
+    //     res.sendStatus(201)
+    //     // console.log(result.rows);
+    //     // res.send(result.rows).end()
+    //   }))
+    //   catch(error=>{
+    //     console.log(error);
+    //     res.status(400).end()
+    //   })
 });
 
 // getBug
-app.get('/api/messages/:id', (req, res) => {
+app.get('/bugtracker/:id', (req, res) => {
   pool.getBug(req.params.id)
-    .then(result => {
-      console.log(result);
-      res.sendStatus(201)
-    })
-    .catch(error=>{
-      console.log(error);
-      res.status(400).end()
-      })
+    .then(results => res.send(results))
+    // .then(result => {
+    //   console.log(result);
+    //   res.sendStatus(201)
+    // })
+    // .catch(error=>{
+    //   console.log(error);
+    //   res.status(400).end()
+    //   })
 });
 
-
-module.exports = app;
+app.listen(3000, () => {console.log('End of index.js. Server is running port 3000')}); 
 
 //  original code
 
