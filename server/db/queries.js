@@ -51,7 +51,7 @@ const deleteBug = (id) => {
   return pool.query('DELETE FROM bugs WHERE id = $1', values)
     // .then(() => true)
     .then(result => {
-      console.log("q: dB: r", result);
+      console.log("q: dB: COMPLETED SUCCESSFULLY");
       return result.rows;
     })
     .catch(err => {

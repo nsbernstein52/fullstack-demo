@@ -47,7 +47,8 @@ app.post('/bugtracker', (req, res) => {
 // deleteBug  WORKING!
 app.delete('/bugtracker/:id', (req, res) => {
   console.log("i: dB: d: r.p.i: ", req.params.id);
-  return pool.deleteBug(req.params.id)
+  // return pool.deleteBug(req.params.id)
+  pool.deleteBug(req.params.id)
     // .then(results => res.send(results))
     .then(result => {
     console.log("i: dB: result: ", result);
