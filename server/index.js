@@ -35,6 +35,18 @@ app.post('/bugtracker', (req, res) => {
     //   })
 });
 
+// deleteBug
+app.delete('/bugtracker/:id', (req, res) => {
+  return pool.deleteBug(req.params.id)
+  .then(results => res.send(results))
+  // .then(() => res.sendStatus(201))
+  //     .catch(error=>{
+  //       console.log(error);
+  //       res.status(400).end()
+  //     })
+});
+
+
 // getAllBugs
 app.get('/bugtracker', (req, res) => {
   pool.getAllBugs()
@@ -53,6 +65,20 @@ app.get('/bugtracker', (req, res) => {
 
 // getBug
 app.get('/bugtracker/:id', (req, res) => {
+  pool.getBug(req.params.id)
+    .then(results => res.send(results))
+    // .then(result => {
+    //   console.log(result);
+    //   res.sendStatus(201)
+    // })
+    // .catch(error=>{
+    //   console.log(error);
+    //   res.status(400).end()
+    //   })
+});
+
+// getBug
+app.get('/bugtracker/:threat_level', (req, res) => {
   pool.getBug(req.params.id)
     .then(results => res.send(results))
     // .then(result => {
