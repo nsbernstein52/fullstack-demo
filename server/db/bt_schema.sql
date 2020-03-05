@@ -35,7 +35,7 @@ INSERT INTO users (user_name) VALUES ('Daniel');
 INSERT INTO users (user_name) VALUES ('Nick');
 INSERT INTO users (user_name) VALUES ('Teddi');
 INSERT INTO users (user_name) VALUES ('Surj');
-
+ 
 INSERT INTO threat_levels (threat_level) VALUES ('Critical');
 INSERT INTO threat_levels (threat_level) VALUES ('Important');
 INSERT INTO threat_levels (threat_level) VALUES ('Low-Priority');
