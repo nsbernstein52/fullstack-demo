@@ -36,8 +36,9 @@ const addBug = (bugs) => {
 
 // DELETE FROM table_name WHERE condition;
 const deleteBug = (id) => {
-  let value = [id]
-  return pool.query('DELETE FROM bugs WHERE id = $1', value)
+  // console.log("entering dB:", id);
+  let values = [id]
+  return pool.query('DELETE FROM bugs WHERE id = $1', values)
       .then(() => true)
 };
 
@@ -60,15 +61,15 @@ const getBug = (id) => {
 
 // SELECT * FROM table_name WHERE value = column
 const filterBugsThreatLevel = (threat_level) => {
-  let values = [threat_level]
+  let values = [bugs.threat_level]
   return pool.query(`SELECT * FROM bugs WHERE $1 = threat_level`, values)
     .then(res => res.rows)
 };
 
 // UPDATE table SET column = <newVal> WHERE condition; ???
-const updateBugThreatLevel = (messages) => {
-  let values = [req.params.id, req.body.description, req.body.reported_by, req.body.created_date, req.body.assigned_to, req.body.threat_level ]
-  return pool.query('UPDATE bugs SET assigned_to = $5 WHERE id = $1', values)
+const updateBugThreatLevel = (bugs) => {
+  let values = [req.params.id, req.body.threat_level ]
+  return pool.query('UPDATE bugs SET threat_level = $2 WHERE id = $1', values)
       .then(() => true)
 };
 
