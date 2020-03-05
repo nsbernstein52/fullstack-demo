@@ -3,7 +3,7 @@
 // functions
 //   addBug tbd
 //   deleteBug tbd
-//   filterBugsThreatLevel tbd
+//   filterBugsByThreatLevel tbd
 //   getAllBugs tbd
 //   getBug tbd
 //   updateBugThreatLevel tbd
@@ -42,6 +42,13 @@ const deleteBug = (id) => {
       .then(() => true)
 };
 
+// SELECT * FROM table_name WHERE value = column
+const filterBugsByThreatLevel = (threat_level) => {
+  let values = [threat_level]
+  return pool.query(`SELECT * FROM bugs WHERE $1 = threat_level`, values)
+    .then(res => res.rows)
+};
+
 // SELECT * FROM table_name
 const getAllBugs = () => {
   console.log('Entering gAB')
@@ -56,13 +63,6 @@ const getAllBugs = () => {
 const getBug = (id) => {
   let values = [id]
   return pool.query(`SELECT * FROM bugs WHERE $1 = id`, values)
-    .then(res => res.rows)
-};
-
-// SELECT * FROM table_name WHERE value = column
-const filterBugsByThreatLevel = (threat_level) => {
-  let values = [threat_level]
-  return pool.query(`SELECT * FROM bugs WHERE $1 = threat_level`, values)
     .then(res => res.rows)
 };
 
