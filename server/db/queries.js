@@ -55,10 +55,18 @@ const filterBugsByThreatLevel = (threat_level) => {
 const getAllBugs = () => {
   console.log("q: gAB: ");
   return pool.query('SELECT * FROM bugs') 
-    .then(res => {
-      console.log(res.rows);
-      return res.rows;
+    .then(result => {
+      // console.log("q: gAB: r.r", result.rows[1]);
+      return result.rows;
     })
+    // .end() express, not pg!
+    // console.log(result);
+    .catch(err => {
+      console.error(err);
+      res.status(400)
+    // .end() express, not pg!
+  })
+
 };
 
 // SELECT * FROM table_name WHERE value = column
