@@ -23,7 +23,7 @@ console.log('Connected to DB. At beginning of queries functions');
 const addBug = (bugs) => {
   console.log("q: aB: bugs:", bugs);
   let values = [
-    bugs.description, 
+    bugs.bug_description, 
     bugs.reported_by,
     bugs.created_date,
     bugs.assigned_to,
