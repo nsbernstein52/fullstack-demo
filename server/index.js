@@ -46,6 +46,22 @@ app.delete('/bugtracker/:id', (req, res) => {
   //     })
 });
 
+// filterBugsByThreatLevel
+app.get('/bugtracker/:threat_level', (req, res) => {
+  pool.filterBugsByThreatLevel(req.params.id, req.body.threat_level)
+    .then(results => res.send(results))
+    // then( (result) => ({
+    //     console.log(result);
+    //     res.sendStatus(201)
+    //     // console.log(result.rows);
+    //     // res.send(result.rows).end()
+    //   }))
+    //   catch(error=>{
+    //     console.log(error);
+    //     res.status(400).end()
+    //   })
+});
+
 
 // getAllBugs
 app.get('/bugtracker', (req, res) => {
@@ -88,6 +104,20 @@ app.get('/bugtracker/:threat_level', (req, res) => {
     // .catch(error=>{
     //   console.log(error);
     //   res.status(400).end()
+    //   })
+  });
+
+    // updateBugByThreatLevel
+app.get('/bugtracker/:threat_level', (req, res) => {
+  // console.log(req.params, req.body)
+  pool.updateBugByThreatLevel(req.params.id, req.body.threat_level)
+    .then(results => res.send(results))
+    // .then(results => {
+    //     res.send(results);
+    //   })
+    //   .catch(error=>{
+    //     console.log(error);
+    //     res.status(400).end()
     //   })
 });
 
