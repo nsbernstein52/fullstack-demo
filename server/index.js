@@ -51,10 +51,13 @@ app.delete('/bugtracker/:id', (req, res) => {
 
 // filterBugsByThreatLevel
 app.get('/bugtracker/:threat_level', (req, res) => {
+// app.get('/bugtracker/', (req, res) => {
+  console.log("i: fBBTL: g: t_l", threat_level);
   console.log("i: fBBTL: g: r.p.i", req.params.id);
   console.log("i: fBBTL: g: r.b.t_l", req.body.threat_level);
   // pool.filterBugsByThreatLevel(req.params.id, req.body.threat_level)
-  pool.filterBugsByThreatLevel(req.body.threat_level)
+  // pool.filterBugsByThreatLevel(req.body.threat_level)
+  pool.filterBugsByThreatLevel(threat_level)
     .then(results => res.send(results))
     // then( (result) => ({
     //     console.log(result);
